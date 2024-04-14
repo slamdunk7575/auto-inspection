@@ -1,6 +1,6 @@
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter:3.2.0'
-    implementation 'org.springframework.boot:spring-boot-starter-web:3.2.0'
+    implementation 'org.springframework.boot:spring-boot-starter:3.2.4'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.2.4'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
     implementation(project(":common"))
@@ -8,6 +8,7 @@ dependencies {
     implementation(project(":usecase:post-usecase"))
 
     implementation(project(":adapter:mysql"))
+    implementation(project(":adapter:kafka"))
     implementation(project(":adapter:metadata-client"))
 
 }
