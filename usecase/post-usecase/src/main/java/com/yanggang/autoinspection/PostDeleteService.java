@@ -7,15 +7,19 @@ import org.springframework.stereotype.Service;
 public class PostDeleteService implements PostDeleteUsecase {
 
     private final PostPort postPort;
+    private final PostMessageProducePort postMessageProducePort;
 
-    public PostDeleteService(PostPort postPort) {
+    public PostDeleteService(PostPort postPort, PostMessageProducePort postMessageProducePort) {
         this.postPort = postPort;
+        this.postMessageProducePort = postMessageProducePort;
     }
 
     @Override
     public Post delete(Request request) {
         Post post = postPort.findById(request.getPostId());
         post.delete();
-        return postPort.save(post);
+        Post deletedPost = postPort.save(post);
+        postMessageProducePort.sendDeleteMessage(deletedPost.getId());
+        return deletedPost;
     }
 }
