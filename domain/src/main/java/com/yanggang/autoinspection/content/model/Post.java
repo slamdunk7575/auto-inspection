@@ -43,8 +43,8 @@ public class Post {
 
     public Post delete() {
         LocalDateTime now = LocalDateTime.now();
+        this.deletedDate = now;
         this.updatedDate = now;
-        this.createdDate = now;
         return this;
     }
 
