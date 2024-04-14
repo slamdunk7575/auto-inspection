@@ -37,7 +37,7 @@ public class ResolvedPost {
         this.isUpdated = isUpdated;
     }
 
-    public static ResolvedPost of(
+    public static ResolvedPost generate(
             Post post,
             String userName,
             String categoryName
