@@ -43,7 +43,16 @@ public class PostMessageProduceAdapter implements PostMessageProducePort {
     private PostMessage convertToMessage(Long id, Post post, OperationType operationType) {
         return new PostMessage(
                 id,
-                post == null ? null : PostMessage.Payload.builder().build(),
+                post == null ? null : PostMessage.Payload.builder()
+                        .id(post.getId())
+                        .title(post.getTitle())
+                        .content(post.getContent())
+                        .userId(post.getUserId())
+                        .categoryId(post.getCategoryId())
+                        .createdDate(post.getCreatedDate())
+                        .updatedDate(post.getUpdatedDate())
+                        .deletedDate(post.getDeletedDate())
+                        .build(),
                 operationType
         );
     }
