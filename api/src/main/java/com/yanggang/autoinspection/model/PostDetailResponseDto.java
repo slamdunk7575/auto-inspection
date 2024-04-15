@@ -1,6 +1,6 @@
 package com.yanggang.autoinspection.model;
 
-import com.yanggang.autoinspection.content.model.ResolvedPost;
+import com.yanggang.autoinspection.content.post.model.ResolvedPost;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

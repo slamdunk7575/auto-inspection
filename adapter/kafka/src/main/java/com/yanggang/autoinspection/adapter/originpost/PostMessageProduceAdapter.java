@@ -5,7 +5,7 @@ import com.yanggang.autoinspection.CustomObjectMapper;
 import com.yanggang.autoinspection.PostMessageProducePort;
 import com.yanggang.autoinspection.adapter.common.OperationType;
 import com.yanggang.autoinspection.adapter.exception.KafkaProduceException;
-import com.yanggang.autoinspection.content.model.Post;
+import com.yanggang.autoinspection.content.post.model.Post;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 

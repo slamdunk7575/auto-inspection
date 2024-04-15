@@ -1,7 +1,7 @@
 package com.yanggang.autoinspection.post;
 
 import com.yanggang.autoinspection.PostPort;
-import com.yanggang.autoinspection.content.model.Post;
+import com.yanggang.autoinspection.content.post.model.Post;
 import org.springframework.stereotype.Component;
 
 @Component

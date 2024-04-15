@@ -1,6 +1,6 @@
 package com.yanggang.autoinspection;
 
-import com.yanggang.autoinspection.content.model.Post;
+import com.yanggang.autoinspection.content.post.model.Post;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,6 +1,6 @@
 package com.yanggang.autoinspection;
 
-import com.yanggang.autoinspection.content.model.ResolvedPost;
+import com.yanggang.autoinspection.content.post.model.ResolvedPost;
 
 public interface PostReadUsecase {
 

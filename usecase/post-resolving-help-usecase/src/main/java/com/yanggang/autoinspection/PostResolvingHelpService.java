@@ -1,7 +1,7 @@
 package com.yanggang.autoinspection;
 
-import com.yanggang.autoinspection.content.model.Post;
-import com.yanggang.autoinspection.content.model.ResolvedPost;
+import com.yanggang.autoinspection.content.post.model.Post;
+import com.yanggang.autoinspection.content.post.model.ResolvedPost;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

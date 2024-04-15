@@ -1,4 +1,4 @@
-package com.yanggang.autoinspection.content.model;
+package com.yanggang.autoinspection.content.post.model;
 
 import lombok.Builder;
 import lombok.Getter;
