@@ -25,10 +25,11 @@ public class PostInspectService implements PostInspectUsecase {
         AutoInspectionResult inspectedResult = postAutoInspectPort.inspect(post, categoryName);
 
         if (inspectedResult.isBadStatus()) {
-            return InspectedPost.generate(
+            /*return InspectedPost.generate(
                     post,
                     categoryName,
-                    Arrays.asList("all"));
+                    Arrays.asList("전체"));*/
+            return null;
         }
 
         return InspectedPost.generate(
