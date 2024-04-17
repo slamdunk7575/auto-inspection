@@ -68,4 +68,18 @@ public class Post {
                 .updatedDate(now)
                 .build();
     }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", userId=" + userId +
+                ", categoryId=" + categoryId +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                ", deletedDate=" + deletedDate +
+                '}';
+    }
 }
