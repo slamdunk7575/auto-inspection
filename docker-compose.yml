@@ -92,5 +92,5 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=1234
       - MYSQL_DATABASE=post
-    volumes:
-      - ./.data/mysql:/var/lib/mysql
+#    volumes:
+#      - ./.data/mysql:/var/lib/mysql
