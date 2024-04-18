@@ -39,7 +39,7 @@ public class PostDetailResponseDto {
                 .userName(resolvedPost.getUserName())
                 .categoryName(resolvedPost.getCategoryName())
                 .createdDate(resolvedPost.getCreatedDate())
-                .isUpdated(resolvedPost.isUpdated())
+                .isUpdated(resolvedPost.getIsUpdated())
                 .build();
     }
 }

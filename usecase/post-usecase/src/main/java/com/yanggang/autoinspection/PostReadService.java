@@ -5,8 +5,15 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PostReadService implements PostReadUsecase {
+
+    private final PostResolvingHelpUsecase postResolvingHelpUsecase;
+
+    public PostReadService(PostResolvingHelpUsecase postResolvingHelpUsecase) {
+        this.postResolvingHelpUsecase = postResolvingHelpUsecase;
+    }
+
     @Override
     public ResolvedPost getById(Long postId) {
-        return null;
+        return postResolvingHelpUsecase.resolvePostById(postId);
     }
 }
