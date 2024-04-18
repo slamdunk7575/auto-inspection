@@ -1,4 +1,4 @@
-version: '3'
+# version: '3'
 services:
   zookeeper:
     image: 'bitnami/zookeeper:3.7.2'
@@ -103,5 +103,5 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=rootuser
       - MONGO_INITDB_ROOT_PASSWORD=1234
       - MONGO_INITDB_DATABASE=post
-    volumes:
-      - ./.data/mongodb:/data/db
+#    volumes:
+#      - ./.data/mongodb:/data/db
