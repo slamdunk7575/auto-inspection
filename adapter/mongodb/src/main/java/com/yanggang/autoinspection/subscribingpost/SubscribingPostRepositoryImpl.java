@@ -30,7 +30,6 @@ public class SubscribingPostRepositoryImpl implements SubscribingPostCustomRepos
 
                 );
 
-        System.out.println(query);
         return mongoTemplate.find(query, SubscribingPostDocument.class, "subscribingInboxPosts");
     }
 

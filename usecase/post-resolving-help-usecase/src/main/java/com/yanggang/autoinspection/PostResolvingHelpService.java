@@ -4,7 +4,12 @@ import com.yanggang.autoinspection.content.post.model.Post;
 import com.yanggang.autoinspection.content.post.model.ResolvedPost;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class PostResolvingHelpService implements PostResolvingHelpUsecase {
@@ -40,7 +45,38 @@ public class PostResolvingHelpService implements PostResolvingHelpUsecase {
 
     @Override
     public List<ResolvedPost> resolvePostsByIds(List<Long> postIds) {
-        return postIds.stream().map(this::resolvePostById).toList();
+        if (postIds == null || postIds.isEmpty()) {
+            return List.of();
+        }
+
+        // Cache 에서 한번에 조회 (MultiGet)
+        List<ResolvedPost> resolvedPostsCaches = new ArrayList<>();
+        resolvedPostsCaches.addAll(resolvedPostCachePort.multiGet(postIds));
+
+        // Cache 에 없는 데이터 조회 (7일 이상 지난 데이터 or 새로 조회하는 데이터)
+        List<Long> missingPostIds = postIds.stream()
+                .filter(postId -> resolvedPostsCaches.stream()
+                        .noneMatch(resolvedPost -> resolvedPost.getId().equals(postId))
+                ).toList();
+
+        List<Post> missingPosts = postPort.listByIds(missingPostIds);
+        List<ResolvedPost> missingResolvedPosts = missingPosts.stream()
+                .map(this::resolvedPost)
+                .filter(Objects::nonNull)
+                .toList();
+
+        resolvedPostsCaches.addAll(missingResolvedPosts);
+
+        // 재정렬
+        Map<Long, ResolvedPost> resolvedPostMap = resolvedPostsCaches.stream()
+                .collect(Collectors.toMap(ResolvedPost::getId, Function.identity()));
+
+        List<ResolvedPost> sortingResolvedPostsCaches = postIds.stream()
+                .map(resolvedPostMap::get)
+                .filter(Objects::nonNull)
+                .toList();
+
+        return sortingResolvedPostsCaches;
     }
 
     @Override
