@@ -27,6 +27,7 @@ public class ElasticsearchConfig {
     @Bean
     public RestClient getRestClient() {
         final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+
         return RestClient.builder(new HttpHost(esHost, esPort))
                 .setHttpClientConfigCallback(httpClientBuilder -> {
                     httpClientBuilder.disableAuthCaching();
