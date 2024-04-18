@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/post?createDatabaseIfNotExist=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: 1234
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        use_sql_comments: true
+    generate-ddl: true
+
+  kafka:
+    bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+external-server:
+  metadata:
+    url: http://localhost:8088
