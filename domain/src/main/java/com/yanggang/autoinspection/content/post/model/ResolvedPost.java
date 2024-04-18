@@ -20,7 +20,7 @@ public class ResolvedPost {
     private String categoryName;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
-    private boolean isUpdated;
+    private Boolean isUpdated;
 
     @Builder
     public ResolvedPost(Long id, String title, String content, Long userId, String userName, Long categoryId,
