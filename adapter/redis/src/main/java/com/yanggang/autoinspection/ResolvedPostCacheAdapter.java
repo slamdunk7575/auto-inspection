@@ -6,6 +6,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Objects;
 
 @Component
 public class ResolvedPostCacheAdapter implements ResolvedPostCachePort {
@@ -53,6 +55,22 @@ public class ResolvedPostCacheAdapter implements ResolvedPostCachePort {
     @Override
     public void delete(Long postId) {
         redisTemplate.delete(generateCacheKey(postId));
+    }
+
+    @Override
+    public List<ResolvedPost> multiGet(List<Long> postIds) {
+        List<String> jsonStringList = redisTemplate.opsForValue().multiGet(postIds.stream().map(this::generateCacheKey).toList());
+        if (jsonStringList == null) {
+            return List.of();
+        }
+
+        return jsonStringList.stream().filter(Objects::nonNull).map(jsonString -> {
+            try {
+                return customObjectMapper.readValue(jsonString, ResolvedPost.class);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+        }).toList();
     }
 
     private String generateCacheKey(Long postId) {
