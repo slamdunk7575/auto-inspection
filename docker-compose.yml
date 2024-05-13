@@ -110,8 +110,8 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
-#    volumes:
-#      - ./.data/redis:/data
+    volumes:
+      - ./.data/redis:/data
   elasticsearch:
     image: 'docker.elastic.co/elasticsearch/elasticsearch:7.10.2'
     container_name: elasticsearch
@@ -133,3 +133,16 @@ services:
       - "5601:5601"
     depends_on:
       - elasticsearch
+  filebeat:
+    image: 'docker.elastic.co/beats/filebeat:7.10.2'
+    container_name: filebeat
+    volumes:
+      - ./.data/tomcat/logs:/usr/share/filebeat/logs
+      - ./.data/filebeat/data:/usr/share/filebeat/data
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+    depends_on:
+#      - logstash
+      - zookeeper
+      - kafka1
+      - kafka2
+      - kafka3
