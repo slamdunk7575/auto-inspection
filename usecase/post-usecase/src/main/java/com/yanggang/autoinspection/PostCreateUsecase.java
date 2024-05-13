@@ -8,7 +8,6 @@ public interface PostCreateUsecase {
     Post create(Request request);
 
     @Getter
-
     class Request {
         private final String title;
         private final String content;

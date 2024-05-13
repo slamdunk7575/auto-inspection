@@ -59,18 +59,25 @@ public class ResolvedPostCacheAdapter implements ResolvedPostCachePort {
 
     @Override
     public List<ResolvedPost> multiGet(List<Long> postIds) {
-        List<String> jsonStringList = redisTemplate.opsForValue().multiGet(postIds.stream().map(this::generateCacheKey).toList());
+        List<String> jsonStringList = redisTemplate.opsForValue()
+                .multiGet(postIds.stream()
+                        .map(this::generateCacheKey)
+                        .toList());
+
         if (jsonStringList == null) {
             return List.of();
         }
 
-        return jsonStringList.stream().filter(Objects::nonNull).map(jsonString -> {
-            try {
-                return customObjectMapper.readValue(jsonString, ResolvedPost.class);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-        }).toList();
+        return jsonStringList.stream()
+                .filter(Objects::nonNull)
+                .map(jsonString -> {
+                    try {
+                        return customObjectMapper.readValue(jsonString, ResolvedPost.class);
+
+                    } catch (JsonProcessingException e) {
+                        throw new RuntimeException(e);
+                    }
+                }).toList();
     }
 
     private String generateCacheKey(Long postId) {
