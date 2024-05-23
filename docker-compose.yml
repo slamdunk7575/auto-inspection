@@ -141,7 +141,20 @@ services:
       - ./.data/filebeat/data:/usr/share/filebeat/data
       - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
     depends_on:
-#      - logstash
+      - logstash
+      - zookeeper
+      - kafka1
+      - kafka2
+      - kafka3
+  logstash:
+    image: 'docker.elastic.co/logstash/logstash:7.10.2'
+    container_name: logstash
+    ports:
+      - "5044:5044"
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+    depends_on:
+      - elasticsearch
       - zookeeper
       - kafka1
       - kafka2
